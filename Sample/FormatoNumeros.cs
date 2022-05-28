@@ -6,11 +6,8 @@ using UnityEngine;
 
 public class FormatoNumeros : MonoBehaviour
 {
-    
-    
-    
-    
-    public static FormatoNumeros Instance;
+
+    public static FormatoNumeros Instance {get; private set;}
 
     protected string begin = "{0:#,0";
     protected string dot = ".00";
@@ -21,13 +18,10 @@ public class FormatoNumeros : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if(Instance != null && Instance != this) Destroy(this);
+        else Instance = this;
     }
 
-    private void Start()
-    {
-        //Instance = this;
-    }
 
     public string FormatNumber(double numero)
     {
