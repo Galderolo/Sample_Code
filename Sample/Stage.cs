@@ -194,43 +194,22 @@ public class Stage : MonoBehaviour
 
         switch (currentSelected)
         {
-            case D1:
-                {
-                    Load_Dungeon(1);
-                }
+            case D1: Load_Dungeon(1);
                 break;
-            case D2:
-                {
-                    Load_Dungeon(2);
-                }
+            case D2: Load_Dungeon(2);
                 break;
-            case D3:
-                {
-                    Load_Dungeon(3);
-                }
+            case D3: Load_Dungeon(3);
                 break;
-            case D4:
-                {
-                    Load_Dungeon(4);
-                }
+            case D4: Load_Dungeon(4);
                 break;
-            case D5:
-                {
-                    Load_Dungeon(5);
-                }
+            case D5: Load_Dungeon(5);
                 break;
-            case D6:
-                {
-                    Load_Dungeon(6);
-                }
+            case D6: Load_Dungeon(6);
                 break;
-            case DGOLD:
-                {
+            case DGOLD:              
                     Load_Dungeon(7, CurrenciesAndValues.keys_for_goldchamber);
-                }
                 break;
-
-            default:
+            default: throw new InvalidEnumArgumentException($"Value {currentSelected} was not defined");
                 return;
         }
 
@@ -256,6 +235,8 @@ public class Stage : MonoBehaviour
                 break;
             case DGOLD: Load_Dungeon(14, CurrenciesAndValues.keys_for_mimic);
                 break;
+            default: throw new InvalidEnumArgumentException($"Value {currentSelected} was not defined");
+                return;
 
         }
     }
@@ -263,8 +244,6 @@ public class Stage : MonoBehaviour
 
     private void SetDescription(PointerEventData data)
     {
-
-
         if (data != null)
         {
             var desc = data.pointerEnter.transform.GetComponent<Stage_Description>();
@@ -286,8 +265,7 @@ public class Stage : MonoBehaviour
     //Guardamos el stage actual que esta clickeado
     private void SetCurrentData(PointerEventData data)
     {
-        //currentData = data;
-        
+        //currentData = data; 
     }
 
     private void StageClear()
