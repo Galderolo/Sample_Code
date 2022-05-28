@@ -29,12 +29,9 @@ public class FormatoNumeros : MonoBehaviour
         //Instance = this;
     }
 
-    public string formatNumber(double numero)
+    public string FormatNumber(double numero)
     {
-        
 
-
-        #region CLASS
         double num = numero;
         double cuantas_comas = 0;
         double digits = 0;
@@ -76,6 +73,5 @@ public class FormatoNumeros : MonoBehaviour
         string a = string.Format(res, num);
         return a;
 
-        #endregion
     }
 }
