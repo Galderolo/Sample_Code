@@ -29,7 +29,7 @@ namespace Formulas
         public struct Normal_Dungeons
         {
             public double _base;
-            public double _const;
+            public float _const;
         }
         public Normal_Dungeons[] normal_dungeons_data;
 
@@ -60,7 +60,7 @@ namespace Formulas
 
         private bool enemies_have_armor, enemies_have_shields;
 
-        public static Config_HP Instance { get; private set; }
+        public static HPFormula Instance { get; private set; }
 
         //Check file exist and key 
         private bool CheckFile_CheckKey => ES3.FileExists() && ES3.KeyExists(STR_WAVE);
@@ -118,7 +118,7 @@ namespace Formulas
         /// <summary>
         /// Set Scalable Life for Enemies by Waves
         /// </summary>
-        private void SetScalableHPByWaves()
+        private void SetScalableHPAtInit()
         {
             int num_waves = 200;
             if (CheckFile_CheckKey) new_wave = LoadSaveWave;
@@ -139,7 +139,7 @@ namespace Formulas
         /// <param name="_base">double</param>
         /// <param name="_const">float</param>
         /// <returns>double</returns>
-        private double ConfigHPByWave (double _base, float _const)
+        public double GetConfigHP (double _base, float _const)
         {
             double tempBoss_hp = Math.Round(waves.waveLevel + _base * Math.Pow(_const, waves.waveLevel));
             double tempNormal_hp = Math.Round((waves.waveLevel - 1) + _base * Math.Pow(_const, waves.waveLevel));
@@ -161,6 +161,25 @@ namespace Formulas
             }
         }
 
+        public double GetConfigHP ()
+        {
+            return GetConfigHP(nw_base, nw_const);
+        }
+
+        public double GetConfigHpByWave (double _base, float _const, bool boss_wave, int wave_level)
+        {
+            double b_mult = 1.5;
+            float c_mult = 1.05f;
+
+            if(boss_wave)
+            {
+                double new_base = _base * b_mult;
+                float new_const = _const * c_mult;
+                return Math.Round(new_base * Math.Pow(new_const, wave_level) + 1);
+
+            }
+            return Math.Round(_base * Math.Pow(_const, wave_level));
+        }
         #endregion
     }
 }
