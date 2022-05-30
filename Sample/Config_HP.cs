@@ -60,7 +60,7 @@ namespace Formulas
 
         private bool enemies_have_armor, enemies_have_shields;
 
-        public static HPFormula Instance { get; private set; }
+        public static Config_HP Instance { get; private set; }
 
         //Check file exist and key 
         private bool CheckFile_CheckKey => ES3.FileExists() && ES3.KeyExists(STR_WAVE);
